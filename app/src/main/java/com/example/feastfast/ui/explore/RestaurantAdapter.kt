@@ -27,15 +27,15 @@ class RestaurantAdapter(val data : List<Restaurant> , val context : Context) : R
 
     override fun onBindViewHolder(holder: RestaurantListItemViewHolder, position: Int) {
         holder.binding.apply {
+            textRestaurantName.text = data[position].name
             imageRestaurant.setImageResource(data[position].picture)
             textRating.text = data[position].averageRating.toString()
             textCuisine.text =  data[position].cuisineType
             textAddress.text = data[position].locationAddress
             viewCardContent.setOnClickListener {
                     val intent = Intent(context , RestaurantActivity::class.java)
-                    intent.putExtra("Username", "John Doe")
+                    intent.putExtra("Restaurant",data[position])
                     context .startActivity(intent)
-
             }
 
         }

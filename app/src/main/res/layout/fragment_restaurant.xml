@@ -28,9 +28,9 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_marginStart="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/rating"
-            app:layout_constraintStart_toEndOf="@+id/rating"
-            app:layout_constraintTop_toTopOf="@+id/rating"
+            app:layout_constraintBottom_toBottomOf="@+id/textrating"
+            app:layout_constraintStart_toEndOf="@+id/textrating"
+            app:layout_constraintTop_toTopOf="@+id/textrating"
             app:srcCompat="@drawable/icon_res_arrow" />
 
         <ImageView
@@ -160,7 +160,7 @@
             app:srcCompat="@drawable/icon_res_gps" />
 
         <TextView
-            android:id="@+id/gps"
+            android:id="@+id/textgps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
@@ -195,13 +195,13 @@
             android:textColor="@color/resInfoText"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/resClockIcon"
-            app:layout_constraintStart_toStartOf="@+id/gps" />
+            app:layout_constraintStart_toStartOf="@+id/textgps" />
 
         <TextView
-            android:id="@+id/rating"
+            android:id="@+id/textrating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4.1 (25 Rating)"
+            android:text="4.1 (25 Ratings)"
             android:textColor="@color/resInfoText"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/starIcon"
@@ -212,9 +212,9 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_marginStart="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/gps"
-            app:layout_constraintStart_toEndOf="@+id/gps"
-            app:layout_constraintTop_toTopOf="@+id/gps"
+            app:layout_constraintBottom_toBottomOf="@+id/textgps"
+            app:layout_constraintStart_toEndOf="@+id/textgps"
+            app:layout_constraintTop_toTopOf="@+id/textgps"
             app:srcCompat="@drawable/icon_res_arrow" />
 
         <ImageView

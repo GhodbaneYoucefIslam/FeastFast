@@ -14,7 +14,8 @@ data class CartItem(
     var quantity : Int? = 1,
     var size : String? = "L",
     val specialInstructions : String? = null,
-    val restaurantId : Int
+    val restaurantId : Int,
+    val restaurantName : String
 ){
     fun getTotalPrice(): Double{
         return price*quantity!!.toDouble()*Util().sizeToPriceMultiplier(size!!)

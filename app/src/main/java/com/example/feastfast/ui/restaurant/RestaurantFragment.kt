@@ -20,7 +20,6 @@ class RestaurantFragment : Fragment() {
     private var tabLayout: TabLayout? = null
     private var viewPager2: ViewPager2? = null
     private var adapter: RestaurantMenuAdapter? = null
-    var data = arrayOf("A","B","C")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +35,19 @@ class RestaurantFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //getting current restaurant from activity
+        val activity = activity as RestaurantActivity
+        val currentRestaurant = activity.getCurrentRestaurant()
+        //updating ui based on current restaurant
+        binding.apply {
+            resImage.setImageResource(currentRestaurant.picture)
+            resName.text = currentRestaurant.name
+            resCuisine.text=currentRestaurant.cuisineType
+            resLogo.setImageResource(currentRestaurant.logo)
+            textgps.text=currentRestaurant.locationAddress
+            textrating.text=currentRestaurant.averageRating.toString()
+        }
+
         myContext = requireActivity()
         tabLayout =binding.tabLayout
         viewPager2 = binding.viewPager
@@ -43,7 +55,7 @@ class RestaurantFragment : Fragment() {
         for (x in cats) {
             tabLayout?.addTab(tabLayout?.newTab()!!.setText(x))
         }
-        adapter = RestaurantMenuAdapter(myContext,getCategories())
+        adapter = RestaurantMenuAdapter(myContext,getCategories(),currentRestaurant)
         viewPager2!!.adapter = adapter
         tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {

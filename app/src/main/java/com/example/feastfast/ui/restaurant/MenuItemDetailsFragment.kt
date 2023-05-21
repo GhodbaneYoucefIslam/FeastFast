@@ -45,6 +45,11 @@ class MenuItemDetailsFragment() : BottomSheetDialogFragment() {
         cartItem = menuItem.menuItemToCartItem(menuItem)
         myContext = requireActivity()
 
+        //updating ui based on menu item
+        binding.imageView.setImageResource(menuItem.image)
+        binding.textDescription.text = menuItem.description
+        binding.textMenuItem.text = menuItem.name
+
 
         //dish quantity logic start
         radioGroup= binding.radioGroup
@@ -82,14 +87,21 @@ class MenuItemDetailsFragment() : BottomSheetDialogFragment() {
             NavHostFragment.findNavController(this).navigate(R.id.action_menuItemDetailsFragment_to_restaurantFragment)
         }
         binding.buttonAddToCart.setOnClickListener {
-            AppDatabase.getInstance(myContext)!!.getMenuItemDao().addToCart((cartItem))
-            Toast.makeText(myContext,"Items added to cart!" , Toast.LENGTH_SHORT).show()
-            NavHostFragment.findNavController(this).navigate(R.id.action_menuItemDetailsFragment_to_restaurantFragment)
+            //checking that the cart doesn't contain items from another restaurant
+            val currentRestaurantId = cartItem.restaurantId
+            val restaurantsInCart = AppDatabase.getInstance(myContext)!!.getMenuItemDao().getCurrentRestaurantId()
+            println("current restaurant is "+restaurantsInCart.isEmpty())
+            if((currentRestaurantId in restaurantsInCart) || restaurantsInCart.isEmpty() ){
+                AppDatabase.getInstance(myContext)!!.getMenuItemDao().addToCart((cartItem))
+                Toast.makeText(myContext,"Items added to cart!" , Toast.LENGTH_SHORT).show()
+                NavHostFragment.findNavController(this).navigate(R.id.action_menuItemDetailsFragment_to_restaurantFragment)
+            }else{
+                Toast.makeText(myContext,"Cannot add items from 2 different restaurants!" , Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
     public fun onRadioButtonClicked(view: View){
-        print("\n8888888888888888888888888888888888888\n")
         if (view is RadioButton){
             if (view.isChecked){
                 val id = view.id

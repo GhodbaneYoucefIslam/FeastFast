@@ -40,6 +40,7 @@
     <string name="EmptyCart"> Empty Cart </string>
     <string name="addMoreItems">Add More Items</string>
     <string name="viewCart">View cart</string>
+    <string name="checkout">Checkout</string>
 
 
     <string name="BillText">Bill</string>

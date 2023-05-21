@@ -22,5 +22,8 @@ interface CartItemDao {
     fun getCartContents() : List<CartItem>
 
     @Query("SELECT restaurantId from cartItems ")
-    fun getCurrentRestaurant() : List<Int>
+    fun getCurrentRestaurantId() : List<Int>
+
+    @Query("SELECT restaurantName from cartItems ")
+    fun getCurrentRestaurantName() : List<String>
 }

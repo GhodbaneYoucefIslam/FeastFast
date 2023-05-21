@@ -7,7 +7,7 @@
     tools:context=".ui.explore.ExploreFragment">
 
 
-    <!--page header start -->
+<!--page header start -->
     <TextView
         android:id="@+id/textExplore"
         android:layout_width="wrap_content"
@@ -19,7 +19,6 @@
         app:layout_constraintHorizontal_bias="0.471"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textAll"
         android:layout_width="wrap_content"
@@ -30,7 +29,6 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textExplore"
         app:layout_constraintTop_toBottomOf="@+id/textExplore" />
-
     <ImageView
         android:id="@+id/pizza_icon"
         android:layout_width="wrap_content"
@@ -40,7 +38,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/textAll"
         app:layout_constraintEnd_toStartOf="@+id/textExplore"
         app:layout_constraintTop_toTopOf="parent" />
-
     <View
         android:id="@+id/horizontal_line"
         android:layout_width="0dp"
@@ -50,7 +47,7 @@
         android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textAll" />
-    <!--page header end -->
+<!--page header end -->
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
@@ -67,7 +64,6 @@
         app:queryBackground="@drawable/bg_transparency"
         app:queryHint="Food, restaurant, cuisine ..."
         app:searchIcon="@drawable/icon_search"></androidx.appcompat.widget.SearchView>
-
     <ImageView
         android:id="@+id/iconFilters"
         android:layout_width="wrap_content"
@@ -77,7 +73,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/line"
         app:layout_constraintStart_toEndOf="@+id/line"
         app:layout_constraintTop_toTopOf="@+id/line" />
-
     <View
         android:id="@+id/line"
         android:layout_width="1dp"

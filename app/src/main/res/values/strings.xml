@@ -40,11 +40,6 @@
     <string name="EmptyCart"> Empty Cart </string>
     <string name="addMoreItems">Add More Items</string>
     <string name="viewCart">View cart</string>
-    <string name="categories">Categories</string>
-    <string name="nearYou">Near you</string>
-    <string name="freeDelivery">Free delivery</string>
-    <string name="topRated">Top rated</string>
-    <string name="topPastry">Top pastry and bakery</string>
 
 
     <string name="BillText">Bill</string>

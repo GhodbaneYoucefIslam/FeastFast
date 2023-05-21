@@ -4,8 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.marginBottom
-import androidx.core.view.setMargins
 
 import androidx.recyclerview.widget.RecyclerView
 
@@ -35,11 +33,9 @@ class RestaurantAdapter(val data : List<Restaurant> , val context : Context) : R
             textAddress.text = data[position].locationAddress
             viewCardContent.setOnClickListener {
                     val intent = Intent(context , RestaurantActivity::class.java)
+                    intent.putExtra("Username", "John Doe")
                     context .startActivity(intent)
-            }
-            if (position==data.size-1){
-            val params =root.layoutParams as ViewGroup.MarginLayoutParams
-            params.setMargins(0,0,0,550)
+
             }
 
         }

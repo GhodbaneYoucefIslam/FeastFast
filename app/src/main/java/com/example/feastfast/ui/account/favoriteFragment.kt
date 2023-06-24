@@ -47,7 +47,7 @@ class favoriteFragment : Fragment() {
             }
 
             CoroutineScope(Dispatchers.IO+exceptionHandler).launch {
-                val pref = requireActivity().getSharedPreferences("fileName", Context.MODE_PRIVATE)
+                val pref = requireActivity().getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
                 val idUser = pref.getInt("idUser",0)
                 val response = Endpoint.createEndpoint().getFavRestaurants(idUser)
                 withContext(Dispatchers.Main) {

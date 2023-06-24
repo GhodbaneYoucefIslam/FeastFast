@@ -38,15 +38,7 @@ class RestaurantViewModel : ViewModel() {
 
     fun initilizeFavState(state:Int){
         _favrite.value = state
-        println("hiiiiiiiiiiiiiiiiiiii")
-        println("hiiiiiiiiiiiiiiiiiiii")
-        println("hiiiiiiiiiiiiiiiiiiii")
-        println("hiiiiiiiiiiiiiiiiiiii")
-        println("hiiiiiiiiiiiiiiiiiiii")
-        println("hiiiiiiiiiiiiiiiiiiii")
-        println("hiiiiiiiiiiiiiiiiiiii")
-        println("hiiiiiiiiiiiiiiiiiiii")
-        println("hiiiiiiiiiiiiiiiiiiii")
+
         println(_favrite.value)
     }
     fun handleFavClick(idUser :Int ,idRes:Int?) {

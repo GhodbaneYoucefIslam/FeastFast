@@ -103,15 +103,9 @@ class signupFragment : Fragment() {
         googleSignInClient = GoogleSignIn.getClient(requireActivity() , gso)
 
         binding!!.googleIcon.setOnClickListener {
-            print("------------------------------------------")
-            print("------------------------------------------")
-            print("------------------------------------------")
-            print("------------------------------------------")
-            print("------------------------------------------")
-            print("------------------------------------------")
 
             signInGoogle()
-            print("------------------------------------------")
+
         }
 
         // Initialize views

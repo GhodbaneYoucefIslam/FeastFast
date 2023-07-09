@@ -8,7 +8,8 @@ import com.example.feastfast.models.MenuItem
 import com.example.feastfast.models.Restaurant
 import java.io.Serializable
 
-class RestaurantMenuAdapter(val fragment: FragmentActivity,val data:List<String>,val currentRestaurant: Restaurant,val menuItems: List<MenuItem>?) : FragmentStateAdapter(fragment) {
+class RestaurantMenuAdapter(val fragment: FragmentActivity, val data:List<String>,
+                            private val currentRestaurant: Restaurant, private val menuItems: List<MenuItem>?) : FragmentStateAdapter(fragment) {
 
     override fun createFragment(position: Int): Fragment {
         val fragment : Fragment = RestaurantMenuFragment()

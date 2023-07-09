@@ -20,15 +20,14 @@ class ExploreFragment : Fragment() {
 
     lateinit var myContext : Context
     lateinit var adapter: RestaurantAdapter
-    lateinit var myData : List<Restaurant>
+    private lateinit var myData : List<Restaurant>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentExploreBinding.inflate(inflater,container,false)
-        val view = binding.root
-        return view
+        binding = FragmentExploreBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,7 +39,7 @@ class ExploreFragment : Fragment() {
 
 
 
-        //seach logic
+        //search logic
         val searchView = binding.searchView
         searchView.clearFocus()
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -55,7 +54,7 @@ class ExploreFragment : Fragment() {
 }
 
 
-    fun loadData(){
+    private fun loadData(){
         val exceptionHandler = CoroutineExceptionHandler{ coroutineContext, throwable ->
             requireActivity().runOnUiThread {
                 Toast.makeText(myContext, "request successful with Some unspecified error", Toast.LENGTH_SHORT).show()

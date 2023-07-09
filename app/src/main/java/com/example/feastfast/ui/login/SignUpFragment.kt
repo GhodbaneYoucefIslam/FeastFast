@@ -1,7 +1,6 @@
 package com.example.feastfast.ui.login
 
 import android.Manifest
-import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
@@ -26,7 +25,6 @@ import androidx.fragment.app.Fragment
 import com.example.feastfast.MainActivity
 import com.example.feastfast.R
 import com.example.feastfast.databinding.FragmentSignupBinding
-import com.example.feastfast.models.RegisterRequest
 import com.example.feastfast.models.User
 import com.example.feastfast.models.retrofit.Endpoint
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -37,21 +35,16 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.*
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
-import java.lang.annotation.Native
-import java.net.URI.create
 
 
-class signupFragment : Fragment() {
+class SignUpFragment : Fragment() {
     var binding : FragmentSignupBinding? = null
 
     private lateinit var emailEditText: EditText
@@ -69,12 +62,9 @@ class signupFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSignupBinding.inflate(inflater,container,false)
-        val view = binding!!.root
+        binding = FragmentSignupBinding.inflate(inflater, container, false)
 
-
-        // Inflate the layout for this fragment
-        return view
+        return binding!!.root
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK && requestCode == pickImage) {
@@ -214,7 +204,7 @@ class signupFragment : Fragment() {
                             val data = response.body()!! as User
                             Toast.makeText(
                                 requireActivity(),
-                                " hi  " + data.name,
+                                "Welcome " + data.name,
                                 Toast.LENGTH_SHORT
                             ).show()
                             // save the token
@@ -229,12 +219,11 @@ class signupFragment : Fragment() {
                             }
 
                             val intent = Intent(requireActivity() , MainActivity::class.java)
-                            //     intent.putExtra("user", data) // Pass the Restaurant object as an extra
                             requireActivity().startActivity(intent)
                         } else {
                             Toast.makeText(
                                 requireActivity(),
-                                "register Request unsuccessful!",
+                                "register Request unsuccessfull!",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -253,13 +242,6 @@ class signupFragment : Fragment() {
     }
 
 
-    fun createPartFromString(stringData: String): RequestBody {
-        return stringData.toRequestBody("text/plain".toMediaTypeOrNull())
-    }
-
-
-
-
     private fun signInGoogle(){
         val signInIntent = googleSignInClient.signInIntent
         launcher.launch(signInIntent)
@@ -267,7 +249,7 @@ class signupFragment : Fragment() {
 
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             result ->
-        if (result.resultCode == Activity.RESULT_OK){
+        if (result.resultCode == RESULT_OK){
 
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
             handleResults(task)
@@ -289,7 +271,7 @@ class signupFragment : Fragment() {
         val credential = GoogleAuthProvider.getCredential(account.idToken , null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful){
-                val intent : Intent = Intent(requireActivity() , MainActivity::class.java)
+                val intent = Intent(requireActivity() , MainActivity::class.java)
                 intent.putExtra("email" , account.email)
                 intent.putExtra("name" , account.displayName)
                 startActivity(intent)

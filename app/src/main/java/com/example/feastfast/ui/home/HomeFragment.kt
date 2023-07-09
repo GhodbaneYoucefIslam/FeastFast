@@ -18,7 +18,6 @@ import com.example.feastfast.models.retrofit.Endpoint
 import com.example.feastfast.models.room.AppDatabase
 import com.example.feastfast.ui.address.AddressActivity
 import com.example.feastfast.ui.cart.CartActivity
-import com.example.feastfast.ui.explore.RestaurantAdapter
 import kotlinx.coroutines.*
 
 
@@ -38,16 +37,15 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHomeBinding.inflate(inflater,container,false)
-        val view = binding.root
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         myContext = requireActivity()
-        var images = listOf(R.drawable.image_hotspot,R.drawable.ad3,R.drawable.image_hotspot,R.drawable.ad2,R.drawable.image_hotspot)
+        val images = listOf(R.drawable.image_hotspot,R.drawable.ad3,R.drawable.image_hotspot,R.drawable.ad2,R.drawable.image_hotspot)
         val adapter =  AdsViewPagerAdapter(images)
         binding.viewPager2.adapter = adapter
         binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
@@ -97,7 +95,7 @@ class HomeFragment : Fragment() {
         setAddress()
     }
 
-    fun showCartCount(){
+    private fun showCartCount(){
         val items = AppDatabase.getInstance(myContext)!!.getMenuItemDao().getCartContents()
         val isFilled = items.isNotEmpty()
         val redCircle = binding.redCircle
@@ -114,8 +112,7 @@ class HomeFragment : Fragment() {
     }
 
 
-    //todo : load data from server in home page
-    fun loadTopRated()  {
+    private fun loadTopRated()  {
 
         val exceptionHandler = CoroutineExceptionHandler{ coroutineContext, throwable ->
             requireActivity().runOnUiThread {
@@ -141,7 +138,7 @@ class HomeFragment : Fragment() {
         }
 
     }
-    fun loadTopRaters()  {
+    private fun loadTopRaters()  {
 
         val exceptionHandler = CoroutineExceptionHandler{ coroutineContext, throwable ->
             requireActivity().runOnUiThread {
@@ -216,7 +213,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    fun setAddress(){
+    private fun setAddress(){
         val pref = myContext.getSharedPreferences("myPreferences",Context.MODE_PRIVATE)
         val addressToShow = pref.getString("address","Enter your location")
         binding.textDeliveryAddress.text=addressToShow

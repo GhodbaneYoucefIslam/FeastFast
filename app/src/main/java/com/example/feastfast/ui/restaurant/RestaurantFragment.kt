@@ -34,10 +34,9 @@ class RestaurantFragment : Fragment() {
     lateinit var myContext: FragmentActivity
     private var tabLayout: TabLayout? = null
     private var viewPager2: ViewPager2? = null
-    private var adapter: RestaurantMenuAdapter? = null
-    lateinit var currentRestaurant : Restaurant
+    private lateinit var currentRestaurant : Restaurant
     private var idRes : Int? =0
-    val REQUEST_CALL_PERMISSION = 0
+    private val REQUEST_CALL_PERMISSION = 0
 
 
 
@@ -51,7 +50,7 @@ class RestaurantFragment : Fragment() {
 
         binding = FragmentRestaurantBinding.inflate(inflater,container,false)
         val view = binding.root
-        viewModel = ViewModelProvider(this).get(RestaurantViewModel::class.java)
+        viewModel = ViewModelProvider(this)[RestaurantViewModel::class.java]
 
         return  view
     }
@@ -85,18 +84,13 @@ class RestaurantFragment : Fragment() {
             myContext.finish()
 
         }
-
-
-
-
-
         loadData(currentRestaurant.id)
 
 
     }
 
 
-    fun loadData(restaurantId : Int) {
+    private fun loadData(restaurantId : Int) {
 
         viewModel.data.observe(viewLifecycleOwner) { data ->
             setupViewPagerAndTabLayout(data)
@@ -113,7 +107,7 @@ class RestaurantFragment : Fragment() {
     }
 
 
-    fun setResInfo (res : Restaurant?) {
+    private fun setResInfo (res : Restaurant?) {
         idRes = res?.id
         binding.resName.text = res?.name
         binding.resCuisine.text = res?.cuisineType
@@ -122,13 +116,12 @@ class RestaurantFragment : Fragment() {
         binding.textgps.text = res?.locationAddress
         val startTime = res?.opening_time?.substring(11,16)
         val endTime = res?.closing_time?.substring(11,16)
-        binding.openTime.text = startTime+"-"+endTime
+        binding.openTime.text = "$startTime-$endTime"
         binding.textrating.text = "${res?.averageRating}(${res?.ratersCount} Rating)"
 
 
         if (res?.isPreferred == true ) {
             viewModel.initilizeFavState( 1)
-           // binding!!.resFavIcon.
             binding!!.resFavIcon.setImageResource(R.drawable.baseline_favorite_red_24)
             binding.resName.text = res?.name
         }
@@ -208,26 +201,23 @@ class RestaurantFragment : Fragment() {
             data.putInt("id",res!!.id)
             data.putFloat("average",res!!.averageRating)
             data.putInt("count",res!!.ratersCount)
-
-            //     val data2 = bundleOf("ratings" to res?.averageRating )
-          //  ,res?.raterCount,res?.id
             it.findNavController().navigate(R.id.action_restaurantFragment_to_ratingFragment,data)
 
         }
 
     }
 
-   fun getDistinctCategories(apiResponse:  List<MenuItem>): Array<String> {
+   private fun getDistinctCategories(apiResponse:  List<MenuItem>): Array<String> {
         return apiResponse!!.map { it.categorie }.distinct().toTypedArray()
     }
 
-    fun favIconHnadler () {
+    private fun favIconHnadler () {
         val pref = requireActivity().getSharedPreferences("fileName", Context.MODE_PRIVATE)
         val idUser = pref.getInt("idUser",0)
         viewModel.handleFavClick(idUser ,idRes )
 
     }
-    fun updateFavrite(data :Int){
+    private fun updateFavrite(data :Int){
         if (data == 1) {
             binding?.resFavIcon?.setImageResource(R.drawable.baseline_favorite_red_24)
         }

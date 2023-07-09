@@ -6,13 +6,13 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 
-class loginAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
+class LoginAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
 
 
     override fun createFragment(position: Int): Fragment {
         return if (position == 0) {
-            loginFragment()
-        } else signupFragment()
+            LoginFragment()
+        } else SignUpFragment()
     }
 
     override fun getItemCount(): Int = 2

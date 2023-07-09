@@ -14,7 +14,7 @@ import com.example.feastfast.util.url
 class HomeRestaurantAdapter(val data : List<Restaurant>, val context : Context) : RecyclerView.Adapter<HomeRestaurantAdapter.HomeRestaurantListItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeRestaurantListItemViewHolder {
-        return HomeRestaurantAdapter.HomeRestaurantListItemViewHolder(
+        return HomeRestaurantListItemViewHolder(
             ListItemHomeRestaurantBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,

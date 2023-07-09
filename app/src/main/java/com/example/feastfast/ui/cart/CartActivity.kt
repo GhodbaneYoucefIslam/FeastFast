@@ -14,7 +14,6 @@ import com.example.feastfast.databinding.ActivityCartBinding
 import com.example.feastfast.databinding.ListItemCartBinding
 import com.example.feastfast.models.CartItem
 import com.example.feastfast.models.Order
-import com.example.feastfast.models.Restaurant
 import com.example.feastfast.models.retrofit.Endpoint
 import com.example.feastfast.models.room.AppDatabase
 import com.example.feastfast.ui.restaurant.RestaurantActivity
@@ -25,12 +24,12 @@ import java.time.LocalTime
 
 class CartActivity : AppCompatActivity() {
     lateinit var binding: ActivityCartBinding
-    lateinit var linearLayout: LinearLayout
-    lateinit var cartItems: MutableList<CartItem>
-    lateinit var currentRestaurantName: String
-    var currentRestaurantId : Int = 5
-    var foodBill = 0.0
-    val deliveryBill = 250.0
+    private lateinit var linearLayout: LinearLayout
+    private lateinit var cartItems: MutableList<CartItem>
+    private lateinit var currentRestaurantName: String
+    private var currentRestaurantId : Int = 5
+    private var foodBill = 0.0
+    private val deliveryBill = 250.0
     val myContext = this
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,9 +43,8 @@ class CartActivity : AppCompatActivity() {
         val addButton = binding.buttonAddMoreItems
         //getting cart information from room db
         cartItems = AppDatabase.getInstance(this)!!.getMenuItemDao().getCartContents().toMutableList()
-        Toast.makeText(myContext, "got here", Toast.LENGTH_SHORT).show()
-        currentRestaurantName = AppDatabase.getInstance(this)!!.getMenuItemDao().getCurrentRestaurantName().get(0)
-        currentRestaurantId = AppDatabase.getInstance(this)!!.getMenuItemDao().getCurrentRestaurantId().get(0)
+        currentRestaurantName = AppDatabase.getInstance(this)!!.getMenuItemDao().getCurrentRestaurantName()[0]
+        currentRestaurantId = AppDatabase.getInstance(this)!!.getMenuItemDao().getCurrentRestaurantId()[0]
         binding.textCartSourceName.text=currentRestaurantName
         //displaying the items that where added to cart start
         displayCartItems()
@@ -60,11 +58,10 @@ class CartActivity : AppCompatActivity() {
             AppDatabase.getInstance(this)!!.getMenuItemDao().emptyCart()
             linearLayout.removeAllViews()
             updateUi()
-            Toast.makeText(this,"cart empty!!" , Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Cart emptied!" , Toast.LENGTH_SHORT).show()
         }
 
         addButton.setOnClickListener {
-
 
             val exceptionHandler = CoroutineExceptionHandler{ coroutineContext, throwable ->
                 this.runOnUiThread {
@@ -78,7 +75,7 @@ class CartActivity : AppCompatActivity() {
                 val response = Endpoint.createEndpoint().getUniqueRestaurantById(currentRestaurantId,idUser)
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful && response.body() != null) {
-                        val data = response.body()!! as Restaurant
+                        val data = response.body()!!
                         val intent = Intent(myContext, RestaurantActivity::class.java)
                         intent.putExtra("Restaurant", data)
                         myContext.startActivity(intent)
@@ -100,7 +97,6 @@ class CartActivity : AppCompatActivity() {
                 val popUp = NotLoggedInPopUp()
                 popUp.show(this.supportFragmentManager,"NotLoggedInPopUp")
             }else{
-                Toast.makeText(this,"sending to server" , Toast.LENGTH_SHORT).show()
                 val currentDate = LocalDate.now().toString()
                 val systemTime = LocalTime.now()
                 val currentTime = "${systemTime.hour}:${systemTime.minute}"
@@ -125,7 +121,7 @@ class CartActivity : AppCompatActivity() {
                         withContext(Dispatchers.Main){
                             if (response.isSuccessful && response.body()!=null){
                                 val orderThatWasSent = response.body() as Order
-                                Toast.makeText(myContext, " Your order from ${orderThatWasSent.restaurantName} that costs ${orderThatWasSent.totalPrice} has been validated successfully ", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(myContext, " Your order from ${orderThatWasSent.restaurantName} has been validated successfully ", Toast.LENGTH_SHORT).show()
                                 AppDatabase.getInstance(myContext)!!.getMenuItemDao()!!.emptyCart()
                                 myContext.finish()
                             }else{
@@ -140,11 +136,11 @@ class CartActivity : AppCompatActivity() {
         }
     }
 
-    fun displayCartItems(){
+    private fun displayCartItems(){
         for (cartItem in cartItems){
             val itemBinding: ListItemCartBinding = ListItemCartBinding.inflate(layoutInflater)
             Glide.with(myContext).load(url +cartItem.image) . into(itemBinding.imageItem)
-            itemBinding.textNumberOfItems.text="x${cartItem.quantity.toString()}"
+            itemBinding.textNumberOfItems.text="x${cartItem.quantity}"
             itemBinding.textName.text=cartItem.name
             itemBinding.textPrice.text=cartItem.getTotalPrice().toString()
             itemBinding.textSize.text=cartItem.size
@@ -160,7 +156,7 @@ class CartActivity : AppCompatActivity() {
         }
     }
 
-    fun updateUi(){
+    private fun updateUi(){
         foodBill= cartItems.sumOf { it.getTotalPrice() }
         binding.textDeliveryPrice.text= "$deliveryBill DZD"
         binding.textFoodPrice.text= "$foodBill DZD"

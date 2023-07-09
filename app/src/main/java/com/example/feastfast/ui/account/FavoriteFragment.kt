@@ -15,31 +15,30 @@ import com.example.feastfast.databinding.FragmentFavoriteBinding
 import com.example.feastfast.models.retrofit.Endpoint
 import kotlinx.coroutines.*
 
-class favoriteFragment : Fragment() {
+class FavoriteFragment : Fragment() {
 
 
 
 
         lateinit var binding : FragmentFavoriteBinding
         lateinit var myContext : FragmentActivity
-        override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-        ): View? {
-            binding = FragmentFavoriteBinding.inflate(inflater,container,false)
-            val view = binding.root
-            return view
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentFavoriteBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
             myContext= requireActivity()
-            binding!!.recycleView.layoutManager = LinearLayoutManager(myContext)
+            binding.recycleView.layoutManager = LinearLayoutManager(myContext)
             loadData()
         }
 
 
-        fun loadData(){
+        private fun loadData(){
             val exceptionHandler = CoroutineExceptionHandler{ coroutineContext, throwable ->
                 myContext.runOnUiThread {
                     Toast.makeText(myContext, "request successful with Some unspecified error", Toast.LENGTH_SHORT).show()

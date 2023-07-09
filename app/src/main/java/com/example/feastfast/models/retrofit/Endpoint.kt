@@ -41,8 +41,6 @@ interface Endpoint {
     suspend fun getUserOrders(
         @Path("userId") userId : Int
     ): Response<List<Order>>
-    @GET("users/{idUser}")
-    suspend fun getUserProfile(@Path("idUser") idUser: Int) : Response<User>
 
     @GET("res/ratings/{idRes}")
     suspend fun getRestauranteRating(@Path("idRes") idRes: Int?) : Response<List<Int>>
@@ -66,12 +64,6 @@ interface Endpoint {
         @Part userData: MultipartBody.Part,
         @Part file: MultipartBody.Part
     ):Response<User>
-    /*
-    @POST("users/register")
-    suspend fun register(
-        @Body registerRequest: RegisterRequest
-    ): Response<User>
-    */
     @Multipart
     @POST("users/register")
     suspend fun register(

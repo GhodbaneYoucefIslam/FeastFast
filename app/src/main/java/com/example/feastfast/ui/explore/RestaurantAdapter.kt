@@ -35,8 +35,6 @@ class RestaurantAdapter(var data : List<Restaurant> , val context : Context) : R
              Glide.with(context).load(url+data[position].picture).into(imageRestaurant)
             textRating.text = data[position].averageRating.toString()
             textCuisine.text =  data[position].cuisineType
-            val pref = context.getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
-            val con = pref.getBoolean("connected", false)
             textAddress.text = data[position].locationAddress
             textRestaurantName.text = data[position].name
             viewCardContent.setOnClickListener {

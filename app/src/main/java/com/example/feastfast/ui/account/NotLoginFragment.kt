@@ -9,16 +9,6 @@ import androidx.fragment.app.Fragment
 import com.example.feastfast.databinding.FragmentNotLoginBinding
 import com.example.feastfast.ui.login.LoginActivity
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [NotLoginFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class NotLoginFragment : Fragment() {
 
 
@@ -29,12 +19,8 @@ class NotLoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentNotLoginBinding.inflate(inflater,container,false)
-        val view = binding!!.root
-
-
-        // Inflate the layout for this fragment
-        return view
+        binding = FragmentNotLoginBinding.inflate(inflater, container, false)
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

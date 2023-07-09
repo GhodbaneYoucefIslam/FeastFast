@@ -13,7 +13,7 @@ import com.example.feastfast.models.Restaurant
 class RestaurantMenuFragment : Fragment() {
 
     var binding :FragmentRestaurantMenuBinding? = null
-    lateinit var currentRestaurant: Restaurant
+    private lateinit var currentRestaurant: Restaurant
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,12 +38,6 @@ class RestaurantMenuFragment : Fragment() {
         binding!!.RecycleViewMenu.layoutManager = LinearLayoutManager(requireActivity())
         binding!!.RecycleViewMenu.adapter = RestaurantMenuItemsAdapter(filteredItems,requireActivity(),bundle!!.getString("nameCategorie"))
         return view
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
     }
 
 

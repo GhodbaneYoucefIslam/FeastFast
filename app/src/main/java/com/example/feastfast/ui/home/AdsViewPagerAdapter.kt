@@ -7,7 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feastfast.R
 
-class AdsViewPagerAdapter (val Images:List<Int>):RecyclerView.Adapter<AdsViewPagerAdapter.ViewPagerViewHolder>() {
+class AdsViewPagerAdapter (private val Images:List<Int>):RecyclerView.Adapter<AdsViewPagerAdapter.ViewPagerViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

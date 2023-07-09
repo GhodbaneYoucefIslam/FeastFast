@@ -25,17 +25,15 @@ class AccountFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAccountBinding.inflate(inflater,container,false)
-        val view = binding!!.root
+        binding = FragmentAccountBinding.inflate(inflater, container, false)
 
 
         // Inflate the layout for this fragment
-        return view
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //  val pref = PreferenceManager.getDefaultSharedPreferences(requireActivity() );
         val pref = requireActivity().getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
 
         // Check if the user is not logged in
@@ -44,8 +42,8 @@ class AccountFragment : Fragment() {
         if (! isLoggedIn) {
             navController.navigate(R.id.notLoginFragment)
         }
-        val name = pref.getString("name","not specified ");
-        val imagePath = pref.getString("profile_image","not specified");
+        val name = pref.getString("name","not specified ")
+        val imagePath = pref.getString("profile_image","not specified")
         setUp(name)
 
         Glide.with(requireActivity()).load(url +imagePath) . into(binding!!.pictureAccount)
@@ -93,11 +91,11 @@ class AccountFragment : Fragment() {
 
     private fun showChangeLang() {
 
-        val listItmes = arrayOf("french", "English")
+        val listItems = arrayOf("french", "English")
 
         val mBuilder = AlertDialog.Builder(requireActivity())
         mBuilder.setTitle("Choose Language")
-        mBuilder.setSingleChoiceItems(listItmes, -1) { dialog, which ->
+        mBuilder.setSingleChoiceItems(listItems, -1) { dialog, which ->
             if (which == 0) {
                 setLocate("frm")
                 recreate(requireActivity())
@@ -116,7 +114,7 @@ class AccountFragment : Fragment() {
 
     private fun setLocate(Lang: String?) {
 
-        val locale = Locale(Lang)
+        val locale = Locale(Lang!!)
 
         Locale.setDefault(locale)
 
@@ -130,13 +128,6 @@ class AccountFragment : Fragment() {
 
         }
 
-    }
-
-    private fun loadLocate() {
-        val editor = requireActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE)
-
-        val language = editor.getString("My_Lang", "en")
-        setLocate(language)
     }
 
 

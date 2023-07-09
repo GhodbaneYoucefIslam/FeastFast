@@ -1,12 +1,10 @@
 package com.example.feastfast.ui.address
 
 import android.Manifest
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.*
-import android.os.Build
+import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -19,12 +17,12 @@ import java.util.*
 
 
 class AddressActivity : AppCompatActivity() {
-    val PERMISSION_ID = 100
+    private val PERMISSION_ID = 100
     lateinit var binding: ActivityAddressBinding
-    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    var myAddress = ""
-    var country = ""
-    var city = ""
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private var myAddress = ""
+    private var country = ""
+    private var city = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,18 +40,18 @@ class AddressActivity : AppCompatActivity() {
                 )
         }
         binding.btnConfirm.setOnClickListener {
-            var userInput = binding.editTextAddress.text.toString()
+            val userInput = binding.editTextAddress.text.toString()
             if (userInput.isNotEmpty()){
                 myAddress=userInput
                 saveAddress()
             }else{
-                Toast.makeText(this,"empty!!" , Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Address cannot be empty!" , Toast.LENGTH_SHORT).show()
             }
         }
 
     }
 
-    fun getLocation(){
+    private fun getLocation(){
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -85,7 +83,7 @@ class AddressActivity : AppCompatActivity() {
         }
     }
 
-    fun getCityName(lat:Double,long:Double){
+    private fun getCityName(lat:Double, long:Double){
         try {
             val geocoder = Geocoder(this, Locale.getDefault())
             val address = geocoder.getFromLocation(lat,long,3)
@@ -95,11 +93,11 @@ class AddressActivity : AppCompatActivity() {
                 city=address[0].locality
             }
         }catch (e:Exception){
-            Toast.makeText(this,"getting city!!" , Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Error getting city" , Toast.LENGTH_SHORT).show()
         }
     }
 
-    fun saveAddress(){
+    private fun saveAddress(){
         val pref = getSharedPreferences("myPreferences",Context.MODE_PRIVATE)
         pref.edit {
             putString("address",myAddress)

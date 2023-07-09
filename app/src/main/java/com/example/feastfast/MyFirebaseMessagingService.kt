@@ -19,14 +19,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService()  {
 
 
     override fun onMessageReceived(remoteMessage : RemoteMessage){
-        if(remoteMessage.getNotification()!= null){
+        if(remoteMessage.notification != null){
             generateNotification(remoteMessage.notification!!.title!!,
                 remoteMessage.notification!!.body!!)
         }
     }
 
 
-    fun getRemoteView(title: String, message: String) : RemoteViews{
+    private fun getRemoteView(title: String, message: String) : RemoteViews{
         val remoteView = RemoteViews("com.example.feastfast", R.layout.notification_layout)
 
         remoteView.setTextViewText(R.id.title, title)
@@ -35,7 +35,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService()  {
 
         return remoteView
     }
-    fun generateNotification(title: String, message: String){
+    private fun generateNotification(title: String, message: String){
         val intent = Intent(this , MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(

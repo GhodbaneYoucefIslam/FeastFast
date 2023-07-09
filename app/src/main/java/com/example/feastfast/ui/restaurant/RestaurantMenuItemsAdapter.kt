@@ -19,7 +19,7 @@ class RestaurantMenuItemsAdapter(val data: List<MenuItem>?, val context: Context
     class MenuItemViewHolder(val binding: ListItemMenuBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuItemViewHolder {
-        return RestaurantMenuItemsAdapter.MenuItemViewHolder(
+        return MenuItemViewHolder(
             ListItemMenuBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,

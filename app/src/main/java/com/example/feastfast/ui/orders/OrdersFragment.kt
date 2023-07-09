@@ -19,17 +19,14 @@ class OrdersFragment : Fragment() {
     lateinit var myContext : Context
     lateinit var adapter: OrdersAdapter
     lateinit var data : List<Order>
-    lateinit var myActivity : AppCompatActivity
+    private lateinit var myActivity : AppCompatActivity
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentOrdersBinding.inflate(inflater,container,false)
-        val view = binding.root
+        binding = FragmentOrdersBinding.inflate(inflater, container, false)
 
-
-        // Inflate the layout for this fragment
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,7 +38,7 @@ class OrdersFragment : Fragment() {
 
     }
 
-    fun loadData(){
+    private fun loadData(){
         val exceptionHandler = CoroutineExceptionHandler{ coroutineContext, throwable ->
             requireActivity().runOnUiThread {
                 val errorMessage = "Error occurred: ${throwable.localizedMessage}"
@@ -64,16 +61,4 @@ class OrdersFragment : Fragment() {
         }
     }
 
-
-    /*fun loadData() : List<Order>{
-        return listOf(
-            Order(1,1,"Pizzeria","In preparation","23/06/2023","01:39 PM","Esi, Oued Smar",1500.3F,false),
-            Order(1,1,"Pizzeria","In preparation","23/06/2023","01:39 PM","Esi, Oued Smar",1500.3F,true),
-            Order(1,1,"Pizzeria","In preparation","23/06/2023","01:39 PM","Esi, Oued Smar",1500.3F,false),
-            Order(1,1,"Pizzeria","Completed","23/06/2023","01:39 PM","Esi, Oued Smar",1500.3F,false),
-            Order(1,1,"Pizzeria","In preparation","23/06/2023","01:39 PM","Esi, Oued Smar",1500.3F,false),
-            Order(1,1,"Pizzeria","In preparation","23/06/2023","01:39 PM","Esi, Oued Smar",1500.3F,false),
-        )
-
-    }*/
 }

@@ -11,7 +11,7 @@ import com.example.feastfast.databinding.FragmentNotLoggedInPopUpBinding
 import com.example.feastfast.ui.login.LoginActivity
 
 
-class NotLoggedInPopUp() : DialogFragment()  {
+class NotLoggedInPopUp : DialogFragment()  {
 
     lateinit var binding : FragmentNotLoggedInPopUpBinding
     lateinit var myContext : FragmentActivity
@@ -19,9 +19,8 @@ class NotLoggedInPopUp() : DialogFragment()  {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentNotLoggedInPopUpBinding.inflate(inflater,container,false)
-        val view = binding.root
-        return view
+        binding = FragmentNotLoggedInPopUpBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

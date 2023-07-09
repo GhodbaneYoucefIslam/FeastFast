@@ -13,7 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.*
 
 
-class RatingFragment() : BottomSheetDialogFragment() {
+class RatingFragment : BottomSheetDialogFragment() {
 
     lateinit var binding : FragmentRatingBinding
     lateinit var myContext : FragmentActivity
@@ -34,12 +34,12 @@ class RatingFragment() : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val bundle = arguments
-        val idRes = bundle?.getInt("id", 0) // 0 is the default value if the key is not found
+        val idRes = bundle?.getInt("id", 0)
         val average = bundle?.getFloat("average", 0.5F)
         val count = bundle?.getInt("count", 0)
 
-        binding!!.ratingCount3.text = average.toString()
-        binding!!.ratingNumber3.text = "("+count.toString()+")"
+        binding.ratingCount3.text = average.toString()
+        binding.ratingNumber3.text = "("+count.toString()+")"
         loadRating(idRes,count)
         myContext = requireActivity()
 
@@ -73,18 +73,17 @@ class RatingFragment() : BottomSheetDialogFragment() {
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful && response.body() != null) {
                         val data = response.body()!!.toList()
-                        Toast.makeText(myContext, "Request successful!"+data , Toast.LENGTH_SHORT).show()
-                        binding!!.star5Percentage.text = if (total != 0) ((data[4]*100/ total!!)).toString()+"%" else "0%"
-                        binding!!.stars4Percentage.text =  if (total != 0) ((data[3]*100/ total!!)).toString()+"%" else "0%"
-                        binding!!.star3Percentage.text =  if (total != 0) ((data[2]*100/ total!!)).toString()+"%" else "0%"
-                        binding!!.star2Percentage.text =  if (total != 0) ((data[1]*100/ total!!)).toString()+"%" else "0%"
-                        binding!!.star1Percentage.text =  if (total != 0) ((data[0]*100/ total!!)).toString()+"%" else "0%"
+                        binding.star5Percentage.text = if (total != 0) ((data[4]*100/ total!!)).toString()+"%" else "0%"
+                        binding.stars4Percentage.text =  if (total != 0) ((data[3]*100/ total!!)).toString()+"%" else "0%"
+                        binding.star3Percentage.text =  if (total != 0) ((data[2]*100/ total!!)).toString()+"%" else "0%"
+                        binding.star2Percentage.text =  if (total != 0) ((data[1]*100/ total!!)).toString()+"%" else "0%"
+                        binding.star1Percentage.text =  if (total != 0) ((data[0]*100/ total!!)).toString()+"%" else "0%"
 
-                        binding!!.stars5progressBar.progress  = if (total != 0) ((data[4]*100/ total!!))  else 0
-                        binding!!.stars4progressBar.progress =  if (total != 0) ((data[3]*100/ total!!))  else 0
-                        binding!!.stars3progressBar.progress =  if (total != 0) ((data[2]*100/ total!!))  else 0
-                        binding!!.stars2progressBar.progress =  if (total != 0) ((data[1]*100/ total!!))  else 0
-                        binding!!.stars1progressBar.progress =  if (total != 0) ((data[0]*100/ total!!))  else 0
+                        binding.stars5progressBar.progress  = if (total != 0) ((data[4]*100/ total!!))  else 0
+                        binding.stars4progressBar.progress =  if (total != 0) ((data[3]*100/ total!!))  else 0
+                        binding.stars3progressBar.progress =  if (total != 0) ((data[2]*100/ total!!))  else 0
+                        binding.stars2progressBar.progress =  if (total != 0) ((data[1]*100/ total!!))  else 0
+                        binding.stars1progressBar.progress =  if (total != 0) ((data[0]*100/ total!!))  else 0
                         //binding.
                     } else {
                         Toast.makeText(myContext, "Request unsuccessful!", Toast.LENGTH_SHORT).show()

@@ -1,4 +1,4 @@
-package com.example.feastfast.ui
+package com.example.feastfast.ui.account
 
 import android.app.Activity
 import android.content.Context
@@ -31,7 +31,7 @@ import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
 
-class personalinfoFragment : Fragment() {
+class PersonalInfoFragment : Fragment() {
     var binding: FragmentPersonalinfoBinding? = null
     private val pickImage = 100
     private var imageUri: Uri? = null
@@ -50,7 +50,6 @@ class personalinfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //  val pref = PreferenceManager.getDefaultSharedPreferences(requireActivity() );
         val pref = requireActivity().getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
         binding!!.changeprofile.setOnClickListener {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
@@ -21,11 +20,11 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
-class MenuItemDetailsFragment() : BottomSheetDialogFragment() {
+class MenuItemDetailsFragment : BottomSheetDialogFragment() {
 
     lateinit var binding : FragmentMenuItemDetailsBinding
     lateinit var myContext : FragmentActivity
-    lateinit var radioGroup : RadioGroup
+    private lateinit var radioGroup : RadioGroup
     lateinit var cartItem : CartItem
     lateinit var addToCartButton : Button
     override fun onCreateView(
@@ -64,12 +63,12 @@ class MenuItemDetailsFragment() : BottomSheetDialogFragment() {
         increment.setOnClickListener {
             cartItem.quantity = cartItem.quantity!! + 1
             textAmmount.text=cartItem.quantity.toString()
-            addToCartButton.setText("Add to cart- DZD"+cartItem.getTotalPrice().toString())
+            addToCartButton.text = "Add to cart- DZD"+cartItem.getTotalPrice().toString()
         }
         decrement.setOnClickListener {
             cartItem.quantity = cartItem.quantity!! - 1
             textAmmount.text=cartItem.quantity.toString()
-            addToCartButton.setText("Add to cart- DZD"+cartItem.getTotalPrice().toString())
+            addToCartButton.text = "Add to cart- DZD"+cartItem.getTotalPrice().toString()
         }
         //dish quantity logic end
 
@@ -82,7 +81,7 @@ class MenuItemDetailsFragment() : BottomSheetDialogFragment() {
                     else -> "L"
                 }
                 cartItem.size=checked
-                addToCartButton.setText("Add to cart- DZD"+cartItem.getTotalPrice().toString())
+                addToCartButton.text = "Add to cart- DZD"+cartItem.getTotalPrice().toString()
 
             }
         })
@@ -104,17 +103,6 @@ class MenuItemDetailsFragment() : BottomSheetDialogFragment() {
                 Toast.makeText(myContext,"Cannot add items from 2 different restaurants!" , Toast.LENGTH_SHORT).show()
             }
 
-        }
-    }
-
-    public fun onRadioButtonClicked(view: View){
-        if (view is RadioButton){
-            if (view.isChecked){
-                val id = view.id
-                val checkedButton = myContext.findViewById<RadioButton>(id)
-                cartItem.size=checkedButton.text.toString()
-                addToCartButton.setText("Add to cart- DZD"+cartItem.getTotalPrice().toString())
-            }
         }
     }
 

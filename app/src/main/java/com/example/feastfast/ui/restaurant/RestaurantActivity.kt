@@ -34,7 +34,7 @@ class RestaurantActivity : AppCompatActivity() {
         navController.setGraph(navController.graph, bundle)
     }
 
-    public fun getCurrentRestaurant(): Restaurant {
+    fun getCurrentRestaurant(): Restaurant {
         return intent.getSerializableExtra("Restaurant") as Restaurant
     }
 

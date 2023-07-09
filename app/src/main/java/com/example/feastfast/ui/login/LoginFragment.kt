@@ -17,12 +17,11 @@ import com.example.feastfast.MainActivity
 import com.example.feastfast.R
 import com.example.feastfast.databinding.FragmentLoginBinding
 import com.example.feastfast.models.LoginRequest
-import com.example.feastfast.models.User
 import com.example.feastfast.models.retrofit.Endpoint
 import kotlinx.coroutines.*
 
 
-class loginFragment : Fragment() {
+class LoginFragment : Fragment() {
 
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
@@ -92,12 +91,10 @@ class loginFragment : Fragment() {
                     val response = Endpoint.createEndpoint().login(loginRequest)
                     withContext(Dispatchers.Main) {
                         if (response.isSuccessful && response.body() != null) {
-                            val data = response.body()!! as User
-                            Toast.makeText(requireActivity(), " hi  " + data.name, Toast.LENGTH_SHORT).show()
-                          //  val sharedPreferences = context.getSharedPreferences("MyPrefs", requireActivity().PR)
+                            val data = response.body()!!
+                            Toast.makeText(requireActivity(), "Welcome " + data.name, Toast.LENGTH_SHORT).show()
 
                             // save the token
-                          //  val pref = PreferenceManager.getDefaultSharedPreferences(requireActivity() );
                             val pref = requireActivity().getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
                             pref.edit {
                                 putBoolean("connected",true)
@@ -109,21 +106,13 @@ class loginFragment : Fragment() {
                             }
 
                             val intent = Intent(requireActivity() ,MainActivity::class.java)
-                       //     intent.putExtra("user", data) // Pass the Restaurant object as an extra
                             requireActivity().startActivity(intent)
 
                         } else {
-                            Toast.makeText(requireActivity(), "login Request unsuccessful!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireActivity(), "login Request unsuccessfull!", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
-
-                // You can show a loading indicator or disable the button during the registration process
-
-                // Example code to show a success message
-               // Toast.makeText(requireContext(), "Registration successful", Toast.LENGTH_SHORT).show()
-
-                // Example code to navigate to the login screen after successful registration
 
             }
         }

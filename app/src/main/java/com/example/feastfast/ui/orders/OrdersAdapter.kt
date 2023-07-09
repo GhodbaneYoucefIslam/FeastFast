@@ -5,7 +5,6 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +12,7 @@ import com.example.feastfast.R
 import com.example.feastfast.databinding.ListItemOrderBinding
 import com.example.feastfast.models.Order
 
-class OrdersAdapter(var data : List<Order>, val context : Context, val activity: AppCompatActivity) : RecyclerView.Adapter<OrdersAdapter.OrderListItemViewHolder>() {
+class OrdersAdapter(var data : List<Order>, val context : Context, private val activity: AppCompatActivity) : RecyclerView.Adapter<OrdersAdapter.OrderListItemViewHolder>() {
 
 
 
@@ -44,7 +43,6 @@ class OrdersAdapter(var data : List<Order>, val context : Context, val activity:
             buttonRate.backgroundTintList =  ColorStateList.valueOf( ContextCompat.getColor(context,if(rateable) R.color.pinkish else  R.color.greyish)  )
             buttonRate.setOnClickListener {
                 if(rateable){
-                    Toast.makeText(context,"You will rate" , Toast.LENGTH_SHORT).show()
                     val ratingPopUp = RatingPopUp()
                     val bundle = Bundle()
                     bundle.putInt("userId",data[position].user_id)

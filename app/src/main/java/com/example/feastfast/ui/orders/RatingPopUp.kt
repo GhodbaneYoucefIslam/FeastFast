@@ -54,7 +54,7 @@ class RatingPopUp : DialogFragment() {
                 withContext(Dispatchers.Main){
                     if (response.isSuccessful && response.body()!=null){
                         val ratingThatWasSent = response.body() as Rating
-                        Toast.makeText(myContext, " Your order from ${ratingThatWasSent.restaurantId} that costs ${ratingThatWasSent.review} has been validated successfully ", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(myContext, " Your review ${ratingThatWasSent.review} has been sent successfully ", Toast.LENGTH_SHORT).show()
                         dismiss()
                     }else{
                         Toast.makeText(myContext, " The request was launched but unsuccessful ", Toast.LENGTH_SHORT).show()
